@@ -76,4 +76,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (slides.length > 0) {
         startTimer();
     }
+
+    // =============================================
+    // Premium Scroll Reveal — Intersection Observer
+    // =============================================
+    const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip, .reveal-glow';
+    const revealEls = document.querySelectorAll(revealSelectors);
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Small timeout for extra smoothness on fast scrolls
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, 30);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.10,
+        rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // =============================================
+    // Parallax Header — subtle vertical drift
+    // =============================================
+    const profileHeader = document.querySelector('.profile-header');
+
+    function onScroll() {
+        if (!profileHeader) return;
+        const scrollY = window.scrollY;
+        // Drift upward slowly — max 30px shift, very subtle
+        const drift = Math.min(scrollY * 0.18, 30);
+        const opacity = Math.max(1 - scrollY * 0.0025, 0.4);
+        profileHeader.style.transform = `translateY(-${drift}px)`;
+        profileHeader.style.opacity = opacity;
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
 });
