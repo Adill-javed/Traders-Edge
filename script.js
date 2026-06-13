@@ -1,4 +1,6 @@
+// =============================================
 // FAQ Accordion Interactivity
+// =============================================
 document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll('.faq-item');
 
@@ -20,14 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // =============================================
     // Testimonials Carousel Interactivity
+    // =============================================
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.dot');
     let currentSlideIndex = 0;
     let slideInterval;
 
     function showSlide(index) {
-        // Wrap around bounds
         if (index >= slides.length) {
             currentSlideIndex = 0;
         } else if (index < 0) {
@@ -36,26 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
             currentSlideIndex = index;
         }
 
-        // Update active slide class
         slides.forEach((slide, i) => {
-            if (i === currentSlideIndex) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
+            slide.classList.toggle('active', i === currentSlideIndex);
         });
 
-        // Update active dot class
         dots.forEach((dot, i) => {
-            if (i === currentSlideIndex) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
+            dot.classList.toggle('active', i === currentSlideIndex);
         });
     }
 
-    // Manual slide control via dots
     window.currentSlide = function(index) {
         resetTimer();
         showSlide(index);
@@ -64,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function startTimer() {
         slideInterval = setInterval(() => {
             showSlide(currentSlideIndex + 1);
-        }, 5000); // Rotates every 5 seconds
+        }, 5000);
     }
 
     function resetTimer() {
@@ -72,11 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
         startTimer();
     }
 
-    // Initialize the carousel timer
     if (slides.length > 0) {
         startTimer();
     }
-<<<<<<< HEAD
 
     // =============================================
     // Premium Scroll Reveal — Intersection Observer
@@ -84,22 +74,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-flip, .reveal-glow';
     const revealEls = document.querySelectorAll(revealSelectors);
 
+    function revealElement(el) {
+        el.classList.add('visible');
+    }
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Small timeout for extra smoothness on fast scrolls
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, 30);
+                // Tiny delay so the browser has painted before animating
+                setTimeout(() => revealElement(entry.target), 40);
                 revealObserver.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.10,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px'
     });
 
     revealEls.forEach(el => revealObserver.observe(el));
+
+    // Safety net: reveal any element still invisible after 800ms
+    // (handles edge cases where observer fires before layout is ready)
+    setTimeout(() => {
+        revealEls.forEach(el => {
+            if (!el.classList.contains('visible')) {
+                el.classList.add('visible');
+            }
+        });
+    }, 800);
 
     // =============================================
     // Parallax Header — subtle vertical drift
@@ -109,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function onScroll() {
         if (!profileHeader) return;
         const scrollY = window.scrollY;
-        // Drift upward slowly — max 30px shift, very subtle
         const drift = Math.min(scrollY * 0.18, 30);
         const opacity = Math.max(1 - scrollY * 0.0025, 0.4);
         profileHeader.style.transform = `translateY(-${drift}px)`;
@@ -117,6 +118,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-=======
->>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 });
