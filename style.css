@@ -1,10 +1,13 @@
 /* Reset & Base Styles */
+<<<<<<< HEAD
 html {
     scroll-behavior: smooth;
     overflow-x: hidden; /* Prevent horizontal scroll globally */
     width: 100%;
 }
 
+=======
+>>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 * {
     margin: 0;
     padding: 0;
@@ -40,6 +43,7 @@ body {
     overflow-x: hidden;
     position: relative;
     padding: 24px 16px;
+<<<<<<< HEAD
     width: 100%;
     max-width: 100vw; /* Hard clamp to prevent any bleed */
 }
@@ -163,6 +167,8 @@ body {
     transform: skewX(-20deg);
     animation: shimmerLine 3.5s ease-in-out infinite;
     pointer-events: none;
+=======
+>>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 }
 
 /* Background Glow Elements */
@@ -285,10 +291,15 @@ body {
     font-style: italic;
     background: linear-gradient(135deg, #fff 30%, #fcd34d 100%);
     -webkit-background-clip: text;
+<<<<<<< HEAD
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
     padding-right: 4px; /* Prevents closing quote from being clipped by gradient mask */
+=======
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+>>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 }
 
 .social-pills {
@@ -700,6 +711,7 @@ body {
 }
 
 .faq-answer {
+<<<<<<< HEAD
     display: grid;
     grid-template-rows: 0fr;              /* collapsed: inner div gets 0 height */
     transition: grid-template-rows 0.42s cubic-bezier(0.16, 1, 0.3, 1),
@@ -719,6 +731,19 @@ body {
 .faq-item.active {
     border-color: rgba(245, 158, 11, 0.2);
     box-shadow: 0 0 20px rgba(245, 158, 11, 0.04);
+=======
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+    padding: 0 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.faq-item.active {
+    border-color: rgba(255, 255, 255, 0.12);
+>>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 }
 
 .faq-item.active .faq-icon {
@@ -727,8 +752,14 @@ body {
 }
 
 .faq-item.active .faq-answer {
+<<<<<<< HEAD
     grid-template-rows: 1fr;              /* expanded: inner div gets its natural height */
     padding-bottom: 18px;
+=======
+    max-height: 200px;
+    padding-bottom: 18px;
+    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0), padding 0.3s ease;
+>>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 }
 
 /* Footer Styling */

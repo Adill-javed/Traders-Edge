@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (slides.length > 0) {
         startTimer();
     }
+<<<<<<< HEAD
 
     // =============================================
     // Premium Scroll Reveal — Intersection Observer
@@ -116,4 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
+=======
+>>>>>>> 70f6bc1176ac53bf5db8e64dbc35d013f6026674
 });
